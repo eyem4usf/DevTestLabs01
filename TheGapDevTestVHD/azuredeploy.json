@@ -1,68 +1,245 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "newVMName": {
-      "type": "string",
-      "defaultValue": "TheGapVHDtest2"
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_TheGapDTLtest_adminPassword": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "virtualMachines_TheGapDTLtest_name": {
+            "defaultValue": "TheGapDTLtest",
+            "type": "String"
+        },
+        "networkInterfaces_thegapDTLtest300_name": {
+            "defaultValue": "thegapDTLtest300",
+            "type": "String"
+        },
+        "networkSecurityGroups_TheGapDTLtest_nsg_name": {
+            "defaultValue": "TheGapDTLtest-nsg",
+            "type": "String"
+        },
+        "publicIPAddresses_TheGapDTLtest_ip_name": {
+            "defaultValue": "TheGapDTLtest-ip",
+            "type": "String"
+        },
+        "virtualNetworks_TheGapTest_vnet_name": {
+            "defaultValue": "TheGapTest-vnet",
+            "type": "String"
+        },
+        "storageAccounts_thegapdtltestdiag802_name": {
+            "defaultValue": "thegapdtltestdiag802",
+            "type": "String"
+        },
+        "storageAccounts_thegapdtltestdisks_name": {
+            "defaultValue": "thegapdtltestdisks",
+            "type": "String"
+        }
     },
-    "labName": {
-      "type": "string",
-      "defaultValue": "TheGapDevTest"
-    },
-    "size": {
-      "type": "string",
-      "defaultValue": "Standard_DS2_v2"
-    },
-    "userName": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "password": {
-      "type": "securestring"
-    }
-  },
-  "variables": {
-    "labSubnetName": "[concat(variables('labVirtualNetworkName'), 'Subnet')]",
-    "labVirtualNetworkId": "[resourceId('Microsoft.DevTestLab/labs/virtualnetworks', parameters('labName'), variables('labVirtualNetworkName'))]",
-    "labVirtualNetworkName": "[concat('Dtl', parameters('labName'))]",
-    "vmId": "[resourceId ('Microsoft.DevTestLab/labs/virtualmachines', parameters('labName'), parameters('newVMName'))]",
-    "vmName": "[concat(parameters('labName'), '/', parameters('newVMName'))]"
-  },
-  "resources": [
-    {
-      "apiVersion": "2016-05-15",
-      "type": "Microsoft.DevTestLab/labs/virtualmachines",
-      "name": "[variables('vmName')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "labVirtualNetworkId": "[variables('labVirtualNetworkId')]",
-        "notes": "TheGapVHDtest",
-        "customImageId": "/subscriptions/1c0abacc-76c7-43d5-8ea6-24f43a1e5885/resourcegroups/thegapdevtestrg327571/providers/microsoft.devtestlab/labs/thegapdevtest/customimages/thegapvhdtest",
-        "size": "[parameters('size')]",
-           "dataDisks": "[
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/PeteDTL01/providers/Microsoft.Compute/virtualMachines/TheGapDTLtest'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_TheGapDTLtest_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "eastus2",
+            "tags": {},
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS2_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "UbuntuServer",
+                        "sku": "16.04.0-LTS",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "[parameters('virtualMachines_TheGapDTLtest_name')]",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_thegapdtltestdisks_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_TheGapDTLtest_name'),'OSdisk.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": [
                         {
                             "lun": 0,
-                            "name": "[concat(parameters('virtualMachines_TheGapVHDtest_name'),'-20161130-094841')]",
-                            "createOption": "FromImage",
+                            "name": "[concat(parameters('virtualMachines_TheGapDTLtest_name'),'-20161130-094841')]",
+                            "createOption": "Empty",
                             "vhd": {
-                                "uri": "["https://dpthegapdevtest563.blob.core.windows.net/vhds/TheGapVHDtest-20161130-094841.vhd"]"
-                            }]",
-                 
-        "userName": "[parameters('userName')]",
-        "password": "[parameters('password')]",
-        "isAuthenticationWithSshKey": false,
-        "labSubnetName": "[variables('labSubnetName')]",
-        "disallowPublicIpAddress": false,
-        "storageType": "Premium",
-        "allowClaim": false
-      }
-    }
-  ],
-  "outputs": {
-    "labVMId": {
-      "type": "string",
-      "value": "[variables('vmId')]"
-    }
-  }
+                                "uri": "[concat('https', '://', parameters('storageAccounts_thegapdtltestdisks_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_TheGapDTLtest_name'),'-datadisk01.vhd'))]"
+                            },
+                            "caching": "ReadOnly",
+                            "diskSizeGB": 512
+                        },
+                        {
+                            "lun": 1,
+                            "name": "[concat(parameters('virtualMachines_TheGapDTLtest_name'),'-20161130-094951')]",
+                            "createOption": "Empty",
+                            "vhd": {
+                                "uri": "[concat('https', '://', parameters('storageAccounts_thegapdtltestdisks_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_TheGapDTLtest_name'),'-datadisk02.vhd'))]"
+                            },
+                            "caching": "ReadOnly",
+                            "diskSizeGB": 512
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_TheGapDTLtest_name')]",
+                    "adminUsername": "bosshog",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": false
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('virtualMachines_TheGapDTLtest_adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_thegapDTLtest300_name'))]"
+                        }
+                    ]
+                }
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_thegapdtltestdisks_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_thegapDTLtest300_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/PeteDTL01/providers/Microsoft.Network/networkInterfaces/thegapDTLtest300'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_thegapDTLtest300_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.17.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_TheGapDTLtest_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_TheGapTest_vnet_name')), '/subnets/default')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_TheGapDTLtest_nsg_name'))]"
+                }
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_TheGapDTLtest_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_TheGapTest_vnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_TheGapDTLtest_nsg_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/PeteDTL01/providers/Microsoft.Network/networkSecurityGroups/TheGapDTLtest-nsg'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_TheGapDTLtest_nsg_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-ssh",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "70.126.87.1/32",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/PeteDTL01/providers/Microsoft.Network/publicIPAddresses/TheGapDTLtest-ip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_TheGapDTLtest_ip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/PeteDTL01/providers/Microsoft.Network/virtualNetworks/TheGapTest-vnet'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_TheGapTest_vnet_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.17.0/24"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.17.0/24"
+                        }
+                    }
+                ]
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/petedtl01/providers/Microsoft.Storage/storageAccounts/thegapdtltestdiag802'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_thegapdtltestdiag802_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus2",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/petedtl01/providers/Microsoft.Storage/storageAccounts/thegapdtltestdisks'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_thegapdtltestdisks_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus2",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        }
+    ]
 }
