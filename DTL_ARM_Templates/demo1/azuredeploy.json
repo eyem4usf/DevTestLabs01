@@ -273,45 +273,7 @@
         ]
       }
     },
-        {
-      "name": "[concat('CONTOSO', 'sqlSrv14')]",
-      "type": "Microsoft.Compute/virtualMachines",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', variables('storageName'))]",
-        "[concat('Microsoft.Network/networkInterfaces/', variables('sqlSrvDBNicName'))]",
-        "[concat('Microsoft.Network/publicIPAddresses/', variables('sqlPublicIP'))]"
-      ],
-      "tags": {
-        "displayName": "SQL-Svr-DB"
-      },
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[variables('sqlVmSize')]"
-        },
-        "osProfile": {
-          "computerName": "[variables('sqlSrvDBName')]",
-          "adminUsername": "[parameters('username')]",
-          "adminPassword": "[parameters('password')]"
-        },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "[variables('sqlImagePublisher')]",
-            "offer": "[variables('sqlImageOffer')]",
-            "sku": "[variables('sqlImageSku')]",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "SQL-Svr-DBOSDisk",
-            "vhd": {
-              "uri": "[concat('http://', variables('storageName'), '.blob.core.windows.net/', variables('vhdContainer'), '/', variables('sqlSrvDBOsDiskName'), '.vhd')]"
-            },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
-          }
-        },
-
+     
         "networkProfile": {
           "networkInterfaces": [
             {
