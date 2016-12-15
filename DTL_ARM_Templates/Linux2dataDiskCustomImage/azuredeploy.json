@@ -1,0 +1,134 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "newVMName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the new vm to be created."
+      }
+    },
+    "existingLabName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of an existing lab where the new vm will be created."
+      }
+    },
+    "ImageOSdisk": {
+      "type": "string",
+      "metadata": {
+        "description": "URL to VHD that will be used for image"
+      }
+    },
+    "DataDisk 1": {
+      "type": "string",
+      "metadata": {
+        "description": "URL to data disk one"
+      }
+    },
+    "DataDisk 2": {
+      "type": "string",
+      "metadata": {
+        "description": "URL to data disk two"
+      }
+    },
+    "osType": {
+     "defaultValue": "linux",
+      "type": "string",
+      "metadata": {
+        "description": "OsType of the image"
+      }
+    },
+      "newVMSize": {
+        "defaultValue": "Standard_A1_v2",
+      "type": "string",
+      "metadata": {
+        "description": "The size of the new vm to be created."
+      }
+    },
+    "userName": {
+      "type": "string",
+      "metadata": {
+        "description": "The username for the local account that will be created on the new vm."
+      }
+    },
+    "password": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the local account that will be created on the new vm."
+      }
+    }
+  },
+  "variables": {
+    "labSubnetName": "[concat('Dtl', variables('labVirtualNetworkName'), 'Subnet')]",
+    "labVirtualNetworkId": "[resourceId('Microsoft.DevTestLab/labs/virtualnetworks', parameters('existingLabName'), variables('labVirtualNetworkName'))]",
+    "labVirtualNetworkName": "[concat('Dtl', parameters('existingLabName'))]",
+    "resourceName": "[concat(parameters('existingLabName'), '/', parameters('newVMName'))]",
+    "resourceType": "Microsoft.Compute/virtualMachines"
+  },
+  "resources": 
+[
+    {
+      "apiVersion": "2016-05-15",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[variables('resourceName')]",
+      "location": "[resourceGroup().location]",
+      "properties": 
+      {
+        "size": "[parameters('newVMSize')]",
+
+                "storageProfile": 
+                {
+                    
+                    "osDisk": 
+                    {
+                        "name": "[parameters('newVMName')]",
+                        "createOption": "FromImage",
+                        "image": {
+                                "uri": "[parameters('ImageOSdisk')]  "
+                            },
+                        
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": 
+                    [
+                        {
+                            "lun": 0,
+                            "name": "[concat(parameters('newVMName'),'-20161214-133434Disk01')]",
+                            "createOption": "FromImage",
+                            "image": {
+                                "uri": "[parameters('DataDisk 1')]  "
+                            },
+                            "caching": "None",
+                            "diskSizeGB": 1023
+                        },
+                        {
+                            "lun": 1,
+                            "name": "[concat(parameters('newVMName'),'-20161214-133517Disk02')]",
+                            "createOption": "FromImage",
+                             "image": {
+                                "uri": "[parameters('DataDisk 2')]  "
+                            },
+                            "caching": "None",
+                            "diskSizeGB": 1023
+                        }
+                    ]
+                },    
+
+        "isAuthenticationWithSshKey": false,
+        "userName": "[parameters('userName')]",
+        "sshKey": "",
+        "password": "[parameters('password')]",
+        "labVirtualNetworkId": "[variables('labVirtualNetworkId')]",
+        "labSubnetName": "[variables('labSubnetName')]"
+       
+      }
+    }  
+  ],
+  "outputs": {
+    "vmId": {
+      "type": "string",
+      "value": "[resourceId(variables('resourceType'), parameters('existingLabName'), parameters('newVMName'))]"
+    }
+  }
+}
