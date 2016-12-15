@@ -1,0 +1,359 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_LinuxDeprovTest_adminPassword": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "virtualMachines_LinuxDeprovTest_name": {
+            "defaultValue": "LinuxDeprovTest",
+            "type": "String"
+        },
+        "networkInterfaces_linuxdeprovtest487_name": {
+            "defaultValue": "linuxdeprovtest487",
+            "type": "String"
+        },
+        "networkInterfaces_TestLinuxNic_name": {
+            "defaultValue": "TestLinuxNic",
+            "type": "String"
+        },
+        "networkSecurityGroups_LinuxDeprovTest_nsg_name": {
+            "defaultValue": "LinuxDeprovTest-nsg",
+            "type": "String"
+        },
+        "publicIPAddresses_LinuxDeprovTest_ip_name": {
+            "defaultValue": "LinuxDeprovTest-ip",
+            "type": "String"
+        },
+        "publicIPAddresses_TestLinuxPubIP_name": {
+            "defaultValue": "TestLinuxPubIP",
+            "type": "String"
+        },
+        "virtualNetworks_LinuxDeprov_vnet_name": {
+            "defaultValue": "LinuxDeprov-vnet",
+            "type": "String"
+        },
+        "storageAccounts_cli686fdd1cfde7441b14817_name": {
+            "defaultValue": "cli686fdd1cfde7441b14817",
+            "type": "String"
+        },
+        "storageAccounts_cli85e90882dcd819d214817_name": {
+            "defaultValue": "cli85e90882dcd819d214817",
+            "type": "String"
+        },
+        "storageAccounts_linuxdeprovdiag415_name": {
+            "defaultValue": "linuxdeprovdiag415",
+            "type": "String"
+        },
+        "storageAccounts_linuxdeprovdisks323_name": {
+            "defaultValue": "linuxdeprovdisks323",
+            "type": "String"
+        },
+        "storageAccounts_petetemp2232_name": {
+            "defaultValue": "petetemp2232",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/LinuxDeprov/providers/Microsoft.Compute/virtualMachines/LinuxDeprovTest'.",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('virtualMachines_LinuxDeprovTest_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "eastus2",
+            "tags": {},
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_A1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "UbuntuServer",
+                        "sku": "16.04.0-LTS",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "[parameters('virtualMachines_LinuxDeprovTest_name')]",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', parameters('storageAccounts_linuxdeprovdisks323_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_LinuxDeprovTest_name'),'20161213104824.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": [
+                        {
+                            "lun": 0,
+                            "name": "[concat(parameters('virtualMachines_LinuxDeprovTest_name'),'-20161214-133434Disk01')]",
+                            "createOption": "Empty",
+                            "vhd": {
+                                "uri": "[concat('https', '://', parameters('storageAccounts_linuxdeprovdisks323_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_LinuxDeprovTest_name'),'-20161214-133434Disk01.vhd'))]"
+                            },
+                            "caching": "None",
+                            "diskSizeGB": 1023
+                        },
+                        {
+                            "lun": 1,
+                            "name": "[concat(parameters('virtualMachines_LinuxDeprovTest_name'),'-20161214-133517Disk02')]",
+                            "createOption": "Empty",
+                            "vhd": {
+                                "uri": "[concat('https', '://', parameters('storageAccounts_linuxdeprovdisks323_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_LinuxDeprovTest_name'),'-20161214-133517Disk02.vhd'))]"
+                            },
+                            "caching": "None",
+                            "diskSizeGB": 1023
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_LinuxDeprovTest_name')]",
+                    "adminUsername": "bosshog",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": false
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('virtualMachines_LinuxDeprovTest_adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_linuxdeprovtest487_name'))]"
+                        }
+                    ]
+                }
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_linuxdeprovdisks323_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_linuxdeprovtest487_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/LinuxDeprov/providers/Microsoft.Network/networkInterfaces/linuxdeprovtest487'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_linuxdeprovtest487_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.2.3.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_LinuxDeprovTest_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_LinuxDeprov_vnet_name')), '/subnets/default')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_LinuxDeprovTest_nsg_name'))]"
+                }
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_LinuxDeprovTest_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_LinuxDeprov_vnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_LinuxDeprovTest_nsg_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/LinuxDeprov/providers/Microsoft.Network/networkInterfaces/TestLinuxNic'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaces_TestLinuxNic_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "default-ip-config",
+                        "properties": {
+                            "privateIPAddress": "10.2.3.5",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_TestLinuxPubIP_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_LinuxDeprov_vnet_name')), '/subnets/default')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_TestLinuxPubIP_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_LinuxDeprov_vnet_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/LinuxDeprov/providers/Microsoft.Network/networkSecurityGroups/LinuxDeprovTest-nsg'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_LinuxDeprovTest_nsg_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-ssh",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/LinuxDeprov/providers/Microsoft.Network/publicIPAddresses/LinuxDeprovTest-ip'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_LinuxDeprovTest_ip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/LinuxDeprov/providers/Microsoft.Network/publicIPAddresses/TestLinuxPubIP'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_TestLinuxPubIP_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/LinuxDeprov/providers/Microsoft.Network/virtualNetworks/LinuxDeprov-vnet'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_LinuxDeprov_vnet_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "eastus2",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.2.3.0/24"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.2.3.0/24"
+                        }
+                    }
+                ]
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/linuxdeprov/providers/Microsoft.Storage/storageAccounts/cli686fdd1cfde7441b14817'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_cli686fdd1cfde7441b14817_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus2",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/linuxdeprov/providers/Microsoft.Storage/storageAccounts/cli85e90882dcd819d214817'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_cli85e90882dcd819d214817_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus2",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/linuxdeprov/providers/Microsoft.Storage/storageAccounts/linuxdeprovdiag415'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_linuxdeprovdiag415_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus2",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/linuxdeprov/providers/Microsoft.Storage/storageAccounts/linuxdeprovdisks323'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_linuxdeprovdisks323_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus2",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/603285d6-1acd-4bd7-bf0d-761e03879f79/resourceGroups/linuxdeprov/providers/Microsoft.Storage/storageAccounts/petetemp2232'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_petetemp2232_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus2",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        }
+    ]
+}
