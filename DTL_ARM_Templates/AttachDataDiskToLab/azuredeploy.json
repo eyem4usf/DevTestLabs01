@@ -1,0 +1,55 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {    
+    "labname": {
+    "type": "string",
+    "metadata": {
+      "description": "The name of the lab."
+      }
+    },
+    "userObjectId": {
+    "type": "string",
+    "metadata": {
+      "description": "The Object ID of the user who has the permission to see the data disk in the list."
+      }
+    },
+    "diskname": {
+    "type": "string",
+    "metadata": {
+      "description": "The name of the data disk."
+      }
+    },
+    "disksize": {
+    "type": "string",
+    "metadata": {
+      "description": "The size of the disk in GiB. e.g. 1023."
+      }
+    },
+    "diskUri": {
+    "type": "string",
+    "metadata": {
+      "description": "The Uri of the data disk. e.g. https://labstorage.blob.core.windows.net/datadisks/diskname.vhd"
+      }
+    }
+  },
+  "variables": {    
+    "resourceName": "[concat(parameters('labname'), '/', parameters('userObjectId'), '/', parameters('diskname'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2016-05-15",
+      "type": "Microsoft.DevTestLab/labs/users/disks",
+      "name": "[variables('resourceName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "diskSizeGiB": "[parameters('disksize')]",
+        "diskBlobName":"[parameters('diskname')]",
+        "leasedByLabVmId":"",
+        "diskUri":"[parameters('diskUri')]"
+      }
+    }
+  ],
+  "outputs": {
+  }
+}
