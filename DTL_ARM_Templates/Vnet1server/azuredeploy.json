@@ -7,19 +7,19 @@
             "type": "SecureString"
         },
         "virtualMachines_DTAarmTESTvm_name": {
-            "defaultValue": "DTAarmTESTvm",
+            "defaultValue": "armTESTvm",
             "type": "String"
         },
         "networkInterfaces_dtaarmtestvm543_name": {
-            "defaultValue": "dtaarmtestvm543",
+            "defaultValue": "armtestvm543",
             "type": "String"
         },
         "virtualNetworks_DTLarmTESTvnet_name": {
-            "defaultValue": "DTLarmTESTvnet",
+            "defaultValue": "armTESTvnet",
             "type": "String"
         },
         "storageAccounts_dtlarmtestrgdisks353_name": {
-            "defaultValue": "dtlarmtestrgdisks353",
+            "defaultValue": "armtestrgdisks353",
             "type": "String"
         }
     },
