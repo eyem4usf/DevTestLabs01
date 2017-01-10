@@ -2,23 +2,23 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_DTAarmTESTvm_adminPassword": {
+        "Password": {
             "defaultValue": null,
             "type": "SecureString"
         },
-        "virtualMachines_DTAarmTESTvm_name": {
+        "vm_name": {
             "defaultValue": "armTESTvm",
             "type": "String"
         },
-        "networkInterfaces_dtaarmtestvm543_name": {
+        "networkinterfacename": {
             "defaultValue": "armtestvm543",
             "type": "String"
         },
-        "virtualNetworks_DTLarmTESTvnet_name": {
+        "vnetname": {
             "defaultValue": "armTESTvnet",
             "type": "String"
         },
-        "storageAccounts_dtlarmtestrgdisks353_name": {
+        "storageaccountname": {
             "defaultValue": "armtestrgdisks353",
             "type": "String"
         }
@@ -28,7 +28,7 @@
         {
             "comments": "Generalized from resource: '/subscriptions/1c0abacc-76c7-43d5-8ea6-24f43a1e5885/resourceGroups/DTLarmTESTrg/providers/Microsoft.Compute/virtualMachines/DTAarmTESTvm'.",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[parameters('virtualMachines_DTAarmTESTvm_name')]",
+            "name": "[parameters('vm_name')]",
             "apiVersion": "2015-06-15",
             "location": "eastus2",
             "properties": {
@@ -43,43 +43,43 @@
                         "version": "latest"
                     },
                     "osDisk": {
-                        "name": "[parameters('virtualMachines_DTAarmTESTvm_name')]",
+                        "name": "[parameters('vm_name')]",
                         "createOption": "FromImage",
                         "vhd": {
-                            "uri": "[concat('https', '://', parameters('storageAccounts_dtlarmtestrgdisks353_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_DTAarmTESTvm_name'),'20170110172245.vhd'))]"
+                            "uri": "[concat('https', '://', parameters('storageaccountname'), '.blob.core.windows.net', concat('/vhds/', parameters('vm_name'),'20170110172245.vhd'))]"
                         },
                         "caching": "ReadWrite"
                     },
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_DTAarmTESTvm_name')]",
+                    "computerName": "[parameters('vm_name')]",
                     "adminUsername": "bosshog",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true
                     },
                     "secrets": [],
-                    "adminPassword": "[parameters('virtualMachines_DTAarmTESTvm_adminPassword')]"
+                    "adminPassword": "[parameters('Password')]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_dtaarmtestvm543_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkinterfacename'))]"
                         }
                     ]
                 }
             },
             "resources": [],
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_dtlarmtestrgdisks353_name'))]",
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_dtaarmtestvm543_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccountname'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkinterfacename'))]"
             ]
         },
         {
             "comments": "Generalized from resource: '/subscriptions/1c0abacc-76c7-43d5-8ea6-24f43a1e5885/resourceGroups/DTLarmTESTrg/providers/Microsoft.Network/networkInterfaces/dtaarmtestvm543'.",
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[parameters('networkInterfaces_dtaarmtestvm543_name')]",
+            "name": "[parameters('networkinterfacename')]",
             "apiVersion": "2016-03-30",
             "location": "eastus2",
             "properties": {
@@ -90,7 +90,7 @@
                             "privateIPAddress": "10.1.0.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_DTLarmTESTvnet_name')), '/subnets/default')]"
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('vnetname')), '/subnets/default')]"
                             }
                         }
                     }
@@ -102,13 +102,13 @@
             },
             "resources": [],
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_DTLarmTESTvnet_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetname'))]"
             ]
         },
         {
             "comments": "Generalized from resource: '/subscriptions/1c0abacc-76c7-43d5-8ea6-24f43a1e5885/resourceGroups/DTLarmTESTrg/providers/Microsoft.Network/virtualNetworks/DTLarmTESTvnet'.",
             "type": "Microsoft.Network/virtualNetworks",
-            "name": "[parameters('virtualNetworks_DTLarmTESTvnet_name')]",
+            "name": "[parameters('vnetname')]",
             "apiVersion": "2016-03-30",
             "location": "eastus2",
             "properties": {
@@ -137,7 +137,7 @@
                 "tier": "Standard"
             },
             "kind": "Storage",
-            "name": "[parameters('storageAccounts_dtlarmtestrgdisks353_name')]",
+            "name": "[parameters('storageaccountname')]",
             "apiVersion": "2016-01-01",
             "location": "eastus2",
             "tags": {},
