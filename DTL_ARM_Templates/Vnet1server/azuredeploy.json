@@ -25,57 +25,7 @@
     },
     "variables": {},
     "resources": [
-        {
-            "comments": "Generalized from resource: '/subscriptions/1c0abacc-76c7-43d5-8ea6-24f43a1e5885/resourceGroups/DTLarmTESTrg/providers/Microsoft.Compute/virtualMachines/DTAarmTESTvm'.",
-            "type": "Microsoft.Compute/virtualMachines",
-            "name": "[parameters('vm_name')]",
-            "apiVersion": "2015-06-15",
-            "location": "eastus2",
-            "properties": {
-                "hardwareProfile": {
-                    "vmSize": "Standard_D1_v2"
-                },
-                "storageProfile": {
-                    "imageReference": {
-                        "publisher": "MicrosoftWindowsServer",
-                        "offer": "WindowsServer",
-                        "sku": "2016-Datacenter",
-                        "version": "latest"
-                    },
-                    "osDisk": {
-                        "name": "[parameters('vm_name')]",
-                        "createOption": "FromImage",
-                        "vhd": {
-                            "uri": "[concat('https', '://', parameters('storageaccountname'), '.blob.core.windows.net', concat('/vhds/', parameters('vm_name'),'20170110172245.vhd'))]"
-                        },
-                        "caching": "ReadWrite"
-                    },
-                    "dataDisks": []
-                },
-                "osProfile": {
-                    "computerName": "[parameters('vm_name')]",
-                    "adminUsername": "bosshog",
-                    "windowsConfiguration": {
-                        "provisionVMAgent": true,
-                        "enableAutomaticUpdates": true
-                    },
-                    "secrets": [],
-                    "adminPassword": "[parameters('Password')]"
-                },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkinterfacename'))]"
-                        }
-                    ]
-                }
-            },
-            "resources": [],
-            "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageaccountname'))]",
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkinterfacename'))]"
-            ]
-        },
+      
         {
             "comments": "Generalized from resource: '/subscriptions/1c0abacc-76c7-43d5-8ea6-24f43a1e5885/resourceGroups/DTLarmTESTrg/providers/Microsoft.Network/networkInterfaces/dtaarmtestvm543'.",
             "type": "Microsoft.Network/networkInterfaces",
