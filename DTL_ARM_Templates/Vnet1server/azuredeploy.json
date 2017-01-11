@@ -4,23 +4,23 @@
     "parameters": {
         "Password": {
             "defaultValue": null,
-            "type": "SecureString"
+            "type": "securestring"
         },
         "vm_name": {
             "defaultValue": "armTESTvm",
-            "type": "String"
+            "type": "string"
         },
         "networkinterfacename": {
             "defaultValue": "armtestvm543",
-            "type": "String"
+            "type": "string"
         },
         "vnetname": {
             "defaultValue": "armTESTvnet",
-            "type": "String"
+            "type": "string"
         },
         "storageaccountname": {
             "defaultValue": "armtestrgdisks353",
-            "type": "String"
+            "type": "string"
         }
     },
     "variables": {},
