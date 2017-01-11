@@ -29,6 +29,10 @@
         "sites_dtlarmtestwa_name": {
             "defaultValue": "dtlarmtestwa",
             "type": "string"
+        },
+        "publicIPAddresses_ip_name":{
+            "defaultValue": "PetepublicIP",
+            "type": "string"
         }
     },
     "variables": {},
@@ -97,6 +101,9 @@
                         "properties": {
                             "privateIPAddress": "10.1.0.4",
                             "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_ip_name'))]"
+                            },
                             "subnet": {
                                 "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_DTLarmTESTvnet_name')), '/subnets/default')]"
                             }
