@@ -2,24 +2,24 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "Password": {
+       "Password": {
             "defaultValue": null,
             "type": "securestring"
         },
         "vm_name": {
-            "defaultValue": "armTESTvm",
+            "defaultValue": "armvm1",
             "type": "string"
         },
         "networkinterfacename": {
-            "defaultValue": "armtestvm543",
+            "defaultValue": "armvm1nic",
             "type": "string"
         },
         "vnetname": {
-            "defaultValue": "armTESTvnet",
+            "defaultValue": "armtestvnet1",
             "type": "string"
         },
         "storageaccountname": {
-            "defaultValue": "armtestrgdisks353",
+            "defaultValue": "armtestdisks22",
             "type": "string"
         }
     },
