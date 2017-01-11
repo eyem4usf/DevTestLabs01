@@ -23,7 +23,9 @@
             "type": "string"
         }
     },
-    "variables": {},
+    "variables": {
+        "apiVersion": "2015-06-15"
+    },
     "resources": [
         {
             "comments": "Generalized from resource: '/subscriptions/1c0abacc-76c7-43d5-8ea6-24f43a1e5885/resourceGroups/DTLarmTESTrg/providers/Microsoft.Compute/virtualMachines/DTAarmTESTvm'.",
@@ -139,7 +141,7 @@
             },
             "kind": "Storage",
             "name": "[parameters('storageaccountname')]",
-            "apiVersion": "2016-01-01",
+            "apiVersion": "[variables('apiVersion')]",
             "location": "eastus2",
             "tags": {},
             "properties": {},
