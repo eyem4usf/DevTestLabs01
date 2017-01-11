@@ -46,8 +46,7 @@
                         "name": "[parameters('vm_name')]",
                         "createOption": "FromImage",
                         "vhd": {
-                              "uri": "[concat(reference('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2015-06-15'.primaryEndpoints['blob'], 'vhds/', parameters('vm_name'), '22222.vhd')]"
-
+                              "uri": "[concat(concat(reference('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2015-06-15').primaryEndpoints['blob'], 'vhds/', parameters('vm_name'), '22222.vhd')]"
                         },
                         "caching": "ReadWrite"
                     },
