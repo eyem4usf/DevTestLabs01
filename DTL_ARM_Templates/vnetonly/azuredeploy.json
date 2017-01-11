@@ -3,22 +3,22 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "type": "String"
+            "type": "string"
         },
         "location": {
-            "type": "String"
+            "type": "string"
         },
         "addressPrefix": {
             "defaultValue": "10.0.0.0/16",
-            "type": "String"
+            "type": "string"
         },
         "subnetName": {
             "defaultValue": "subnet-1",
-            "type": "String"
+            "type": "string"
         },
         "subnetAddressPrefix": {
             "defaultValue": "10.0.0.0/24",
-            "type": "String"
+            "type": "string"
         }
     },
     "resources": [
