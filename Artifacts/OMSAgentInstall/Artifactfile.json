@@ -26,6 +26,6 @@
         }
     },
     "runCommand": {
-        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./DownloadAndInstallAgent.ps1 ''', parameters('WorkspaceID'), ''', ''', parameters(WorkspacePrimaryKey), '''\"')]"
+        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass -File DownloadAndInstallAgent.ps1', parameters('WorkspaceID'), parameters('WorkspacePrimaryKey'), \"')]"    
     }
 }
