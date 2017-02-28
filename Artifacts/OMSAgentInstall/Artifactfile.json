@@ -1,1 +1,31 @@
 
+{
+    "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
+    "title": "Install OMS Agent",
+    "publisher": "Pete Sepulveda",
+    "description": "Downloads latest OMSagent and installs",
+    "tags": [
+        "Windows",
+        "OMSagent",
+		"SysAdmin"
+    ],
+    "iconUri": "https://lh3.googleusercontent.com/e7ioSomM1-cRX_4fkSpN-rVl7C9cngTh65CF6nLPqE8LIVqMHnw_-fuNPAbQphixo4ge=w300-rw",
+    "targetOsType": "Windows",
+    "parameters": {
+        "WorkspaceID": {
+            "type": "string",
+            "displayName": "Workspace ID",
+            "description": "The ID of the Log Analytics workspace you want to connect to the agent to.",
+			"allowEmpty": false
+        },
+      "WorkspacePrimaryKey": {
+            "type": "string",
+            "displayName": "Workspace Key",
+            "description": "The Primary key of the Log Analytics workspace you want to connect to the agent to.",
+			"allowEmpty": false
+        }
+    },
+    "runCommand": {
+        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./startRuckZuck.ps1 -PackageList ''', parameters('packages'), '''\"')]"
+    }
+}
