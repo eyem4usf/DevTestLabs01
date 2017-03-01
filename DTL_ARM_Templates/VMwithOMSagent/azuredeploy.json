@@ -6,14 +6,15 @@
       "type": "string",
       "metadata": {
         "description": "Username for the Virtual Machine."
+        }
       },
       "vmName": {
       "type": "string",
       "metadata": {
         "description": "Name for the Virtual Machine."
+      }
       },  
-    },
-    "adminPassword": {
+     "adminPassword": {
       "type": "securestring",
       "metadata": {
         "description": "Password for the Virtual Machine."
