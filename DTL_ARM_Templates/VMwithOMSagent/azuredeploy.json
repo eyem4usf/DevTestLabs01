@@ -6,15 +6,15 @@
       "type": "string",
       "metadata": {
         "description": "Username for the Virtual Machine."
-        }
-      },
-      "vmName": {
+      }
+    },
+    "vmName": {
       "type": "string",
       "metadata": {
         "description": "Name for the Virtual Machine."
       }
-      },  
-     "adminPassword": {
+    },
+    "adminPassword": {
       "type": "securestring",
       "metadata": {
         "description": "Password for the Virtual Machine."
@@ -36,6 +36,12 @@
       "type": "string",
       "metadata": {
         "description": "OMS workspace name"
+      }
+    },
+    "workspacekey": {
+      "type": "string",
+      "metadata": {
+        "description": "OMS workspace key"
       }
     },
     "windowsOSVersion": {
@@ -207,22 +213,11 @@
               "workspaceId": "[parameters('workspaceId')]"
             },
             "protectedSettings": {
-              "workspaceKey": "[listKeys(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName')), '2015-03-20').primarySharedKey]"
+              "workspaceKey": "[parameters('workspacekey')]"
             }
           }
         }
       ]
     }
   ],
-  "outputs": {
-    "sharedKeyOutput": {
-      "value": "[listKeys(resourceId('Microsoft.OperationalInsights/workspaces/', parameters('workspaceName')), '2015-03-20').primarySharedKey]",
-      "type": "string"
-    },
-    "workspaceIdOutput": {
-      "value": "[reference(concat('Microsoft.OperationalInsights/workspaces/', parameters('workspaceName')), '2015-03-20').customerId]",
-      "type": "string"
-    }
-  }
-}
-
+ }
