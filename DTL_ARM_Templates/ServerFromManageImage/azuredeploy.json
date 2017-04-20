@@ -2,6 +2,10 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "labname": {
+      "type": "string",
+      "defaultValue": "MDC-DTL-ManageImageTest"}
+    },
     "VMSize": {
       "type": "string",
       "defaultValue": "Standard_D1",
@@ -56,7 +60,7 @@
   },
   "variables": {
     "location": "[resourceGroup().location]",
-    "vnetID" : "[resourceId(parameters('virtualnetworkResourceGroup'),'Microsoft.Networks/virtualNetworks', parameters('virtualNetworkName'))]", 
+    "vnetID" : "[resourceId('Microsoft.DevTestLab/labs/virtualnetworks', parameters('labName'), parameters('VirtualNetworkName'))]",
     "SubnetID" : "[concat(variables('vnetID'),'/subnets/', parameters('SubnetName'))]" ,
     "MasternetworkInterfaceName": "[concat(parameters('VMName'),'nic')]"  
     
@@ -66,35 +70,12 @@
  
 
  
-        {
-            "name": "[variables('MasternetworkInterfaceName')]",
-            "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2016-09-01",
-            "location": "[variables('location')]",
-            "dependsOn": [
-                             
-            ],
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig1",
-                        "properties": {
-                            "subnet": {
-                                "id": "[variables('SubnetID')]"
-                            },
-                            "privateIPAllocationMethod": "Dynamic"
-                           
-                        }
-                    }
-                ]
-            }
-        },
        
        
        
         {
             "name": "[parameters('VMName')]",
-            "type": "Microsoft.Compute/virtualMachines",
+            "type": "Microsoft.DevtestLab/labs/virtualMachines",
             "apiVersion": "2016-04-30-preview",
             "location": "[variables('location')]",
             "dependsOn": [
@@ -102,6 +83,7 @@
                
             ],
             "properties": {
+                "labVirtualNetworkId": "[variables('vnetID')]",
                 "osProfile": {
                     "computerName": "[parameters('VMName')]",
                     "adminUsername": "[parameters('adminUsername')]",
@@ -118,12 +100,10 @@
                         "id": "/subscriptions/61f3232b-7b0a-4c0c-b558-b241ec754ca4/resourceGroups/DTLmanagedImageARMtestRG/providers/Microsoft.Compute/images/DTLtestImage01-image-20170420092807"
                     }
                 },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('MasternetworkInterfaceName'))]"
-                        }
-                    ]
+                "labSubnetName": "[parameters('SubnetName')]",
+                "disallowPublicIpAddress": true,
+                "storagetype": "Standard",
+                "allowClaim": false
                 }
             }
         }
