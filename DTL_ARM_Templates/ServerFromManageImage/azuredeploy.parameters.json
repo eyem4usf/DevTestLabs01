@@ -1,0 +1,29 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VMName": {
+      "value": "pete01"
+    },
+    "adminUsername": {
+      "value": "attunixadmin"
+    },
+    "adminPassword":{
+      "value": "AttunixSetup@123"
+      
+    },
+    "virtualNetworkName": {
+      "value": "dtltestvnet"
+    },
+    "virtualnetworkResourceGroup": {
+      "value": "DTLmanagedImageARMtestRG"
+    },
+    "SubnetName": {
+      "value": "dtltestSubnet"
+    },
+    "VMsize": {
+      "value": "Standard_DS1_v2"
+    }
+   
+  }
+}
