@@ -18,6 +18,7 @@
     },
     "adminUsername": {
       "type": "string",
+      "defaultValue": "attunixadmin",
       "metadata": {
         "description": "Admin username on all VMs."
       }
@@ -30,18 +31,21 @@
     },
     "virtualNetworkName": {
       "type": "string",
+      "defaultValue": "dtltestvnet",
       "metadata": {
         "description":"Name of existing vnet that you want these resources to use"
       }
     },
       "virtualnetworkResourceGroup": {
         "type": "string",
+        "defaultValue": "DTLmanagedImageARMtestRG",
         "metadata": {
           "description":"Name of resource group that contains the virtual network you want to use"
         }
       },
       "SubnetName": {
       "type": "string",
+        "defaultValue": "dtltestsubnet",
       "metadata": {
         "description":"Name of existing Web/App subnet that you want these resources to use"
       }
