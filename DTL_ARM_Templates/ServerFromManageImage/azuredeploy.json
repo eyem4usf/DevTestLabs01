@@ -60,28 +60,16 @@
   },
   "variables": {
     "location": "[resourceGroup().location]",
-    "vnetID" : "[resourceId('Microsoft.DevTestLab/labs/virtualnetworks', parameters('labName'), parameters('VirtualNetworkName'))]",
-    "SubnetID" : "[concat(variables('vnetID'),'/subnets/', parameters('SubnetName'))]" ,
-    "MasternetworkInterfaceName": "[concat(parameters('VMName'),'nic')]"  
+    "vnetID" : "[resourceId('Microsoft.DevTestLab/labs/virtualnetworks', parameters('labName'), parameters('VirtualNetworkName'))]"
+   
     
   },
-  "resources": [
-  
- 
-
- 
-       
-       
-       
+  "resources": [       
         {
+            "apiVersion": "2016-05-15",
             "name": "[parameters('VMName')]",
             "type": "Microsoft.DevtestLab/labs/virtualMachines",
-            "apiVersion": "2016-04-30-preview",
             "location": "[variables('location')]",
-            "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', variables('MasternetworkInterfaceName'))]"
-               
-            ],
             "properties": {
                 "labVirtualNetworkId": "[variables('vnetID')]",
                 "osProfile": {
