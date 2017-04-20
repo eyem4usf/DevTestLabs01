@@ -1,104 +1,63 @@
 {
-  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "labname": {
+    "newVMName": {
+      "type": "string",
+      "defaultValue": "ptest3"
+    },
+    "labName": {
       "type": "string",
       "defaultValue": "MDC-DTL-ManageImageTest"
     },
-    "VMSize": {
+    "size": {
       "type": "string",
-      "defaultValue": "Standard_D1",
-      "metadata": {
-        "description": "Size of VMs in the VM Scale Set."
-      }
+      "defaultValue": "Standard_DS1_v2"
     },
-    "VMName": {
+    "userName": {
       "type": "string",
-      "metadata": {
-        "description": "String used as a base for naming resources (9 characters or less). A hash is prepended to this string for some resources, and resource-specific information is appended."
-      },
-      "maxLength": 9
+      "defaultValue": "attunixadmin"
     },
-    "adminUsername": {
-      "type": "string",
-      "defaultValue": "attunixadmin",
-      "metadata": {
-        "description": "Admin username on all VMs."
-      }
-    },
-    "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Admin password on all VMs."
-      }
-    },
-    "virtualNetworkName": {
-      "type": "string",
-      "defaultValue": "dtltestvnet",
-      "metadata": {
-        "description":"Name of existing vnet that you want these resources to use"
-      }
-    },
-      "virtualnetworkResourceGroup": {
-        "type": "string",
-        "defaultValue": "DTLmanagedImageARMtestRG",
-        "metadata": {
-          "description":"Name of resource group that contains the virtual network you want to use"
-        }
-      },
-      "SubnetName": {
-      "type": "string",
-        "defaultValue": "dtltestsubnet",
-      "metadata": {
-        "description":"Name of existing Web/App subnet that you want these resources to use"
-      }
-      }
-    
-
-    
+    "password": {
+      "type": "securestring"
+    }
   },
   "variables": {
-    "location": "[resourceGroup().location]",
-    "vnetID" : "[resourceId('Microsoft.DevTestLab/labs/virtualnetworks', parameters('labName'), parameters('VirtualNetworkName'))]"
-   
-    
+    "labSubnetName": "dtltestsubnet",
+    "labVirtualNetworkId": "[resourceId('Microsoft.DevTestLab/labs/virtualnetworks', parameters('labName'), variables('labVirtualNetworkName'))]",
+    "labVirtualNetworkName": "dtltestvnet",
+    "vmId": "[resourceId ('Microsoft.DevTestLab/labs/virtualmachines', parameters('labName'), parameters('newVMName'))]",
+    "vmName": "[concat(parameters('labName'), '/', parameters('newVMName'))]"
   },
-  "resources": [       
-        {
-            "apiVersion": "2016-05-15",
-            "name": "[parameters('VMName')]",
-            "type": "Microsoft.DevtestLab/labs/virtualMachines",
-            "location": "[variables('location')]",
-            "properties": {
-                "labVirtualNetworkId": "[variables('vnetID')]",
-                "osProfile": {
-                    "computerName": "[parameters('VMName')]",
-                    "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]",
-                    "windowsConfiguration": {
-                        "provisionVmAgent": "true"
-                    }
-                },
-                "hardwareProfile": {
-                    "vmSize": "[parameters('VMSize')]"
-                },
-                "storageProfile": {
-                    "imageReference": {
-                        "id": "/subscriptions/61f3232b-7b0a-4c0c-b558-b241ec754ca4/resourceGroups/DTLmanagedImageARMtestRG/providers/Microsoft.Compute/images/DTLtestImage01-image-20170420092807"
-                    }
-                },
-                "labSubnetName": "[parameters('SubnetName')]",
-                "disallowPublicIpAddress": true,
-                "storagetype": "Standard",
-                "allowClaim": false
-                }
-            
-        }
-        
-
-
-        
-
-  ]
+  "resources": [
+    {
+      "apiVersion": "2016-05-15",
+      "type": "Microsoft.DevTestLab/labs/virtualmachines",
+      "name": "[variables('vmName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "labVirtualNetworkId": "[variables('labVirtualNetworkId')]",
+        "notes": "Windows Server 2016 Datacenter",
+        "storageProfile": {
+          "imagereference":{
+                "id": "/subscriptions/61f3232b-7b0a-4c0c-b558-b241ec754ca4/resourceGroups/DTLmanagedImageARMtestRG/providers/Microsoft.Compute/images/DTLtestImage01-image-20170420092807"
+          } 
+          },
+        "size": "[parameters('size')]",
+        "userName": "[parameters('userName')]",
+        "password": "[parameters('password')]",
+        "isAuthenticationWithSshKey": false,
+        "labSubnetName": "[variables('labSubnetName')]",
+        "disallowPublicIpAddress": true,
+        "storageType": "Standard",
+        "allowClaim": false
+      }
+    }
+  ],
+  "outputs": {
+    "labVMId": {
+      "type": "string",
+      "value": "[variables('vmId')]"
+    }
+  }
 }
