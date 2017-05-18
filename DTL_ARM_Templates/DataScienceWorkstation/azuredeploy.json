@@ -24,9 +24,6 @@
         "networkInterfaceName": {
             "type": "String"
         },
-        "networkSecurityGroupName": {
-            "type": "String"
-        },
         "adminPassword": {
             "type": "SecureString"
         },
