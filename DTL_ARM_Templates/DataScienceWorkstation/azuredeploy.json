@@ -3,19 +3,23 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "type": "String"
+            "type": "String",
+            "defaultValue": "northcentralus"
         },
         "virtualMachineName": {
             "type": "String"
         },
         "virtualMachineSize": {
-            "type": "String"
+            "type": "String",
+            "defaultValue": "Standard D2 v2"
         },
         "adminUsername": {
-            "type": "String"
+            "type": "String",
+            "defaultValue": "testadmin"
         },
         "virtualNetworkName": {
-            "type": "String"
+            "type": "String",
+            "defaultValue": "Seagate-AA-vnet-01"
         },
         "networkInterfaceName": {
             "type": "String"
@@ -27,7 +31,8 @@
             "type": "SecureString"
         },
         "subnetName": {
-            "type": "String"
+            "type": "String",
+            "defaultValue": "Adv_Analytics_Subnet"
         }
     },
     "variables": {
@@ -102,77 +107,10 @@
                             "privateIPAllocationMethod": "Dynamic"
                         }
                     }
-                ],
-                "networkSecurityGroup": {
-                    "id": "[resourceId('DataScient01RG', 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
-                }
-            },
-            "dependsOn": [
-                "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
-            ]
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "name": "[parameters('networkSecurityGroupName')]",
-            "apiVersion": "2016-09-01",
-            "location": "[parameters('location')]",
-            "properties": {
-                "securityRules": [
-                    {
-                        "name": "IPythonNB",
-                        "properties": {
-                            "priority": 1010,
-                            "sourceAddressPrefix": "*",
-                            "protocol": "TCP",
-                            "destinationPortRange": "9999",
-                            "access": "Allow",
-                            "direction": "Inbound",
-                            "sourcePortRange": "*",
-                            "destinationAddressPrefix": "*"
-                        }
-                    },
-                    {
-                        "name": "MSSQL",
-                        "properties": {
-                            "priority": 1020,
-                            "sourceAddressPrefix": "*",
-                            "protocol": "TCP",
-                            "destinationPortRange": "1433",
-                            "access": "Allow",
-                            "direction": "Inbound",
-                            "sourcePortRange": "*",
-                            "destinationAddressPrefix": "*"
-                        }
-                    },
-                    {
-                        "name": "RTVSRemote",
-                        "properties": {
-                            "priority": 1030,
-                            "sourceAddressPrefix": "*",
-                            "protocol": "TCP",
-                            "destinationPortRange": "5444",
-                            "access": "Allow",
-                            "direction": "Inbound",
-                            "sourcePortRange": "*",
-                            "destinationAddressPrefix": "*"
-                        }
-                    },
-                    {
-                        "name": "default-allow-rdp",
-                        "properties": {
-                            "priority": 1040,
-                            "sourceAddressPrefix": "*",
-                            "protocol": "TCP",
-                            "destinationPortRange": "3389",
-                            "access": "Allow",
-                            "direction": "Inbound",
-                            "sourcePortRange": "*",
-                            "destinationAddressPrefix": "*"
-                        }
-                    }
                 ]
             }
         }
+        
     ],
     "outputs": {
         "adminUsername": {
