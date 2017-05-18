@@ -4,7 +4,7 @@
     "parameters": {
         "location": {
             "type": "String",
-            "defaultValue": "northcentralus"
+            "defaultValue": "westus"
         },
         "virtualMachineName": {
             "type": "String"
@@ -19,7 +19,7 @@
         },
         "virtualNetworkName": {
             "type": "String",
-            "defaultValue": "Seagate-AA-vnet-01"
+            "defaultValue": "Dtlmdc-DevTestLab"
         },
         "networkInterfaceName": {
             "type": "String"
@@ -29,7 +29,7 @@
         },
         "subnetName": {
             "type": "String",
-            "defaultValue": "Adv_Analytics_Subnet"
+            "defaultValue": "Dtlmdc-DevTestLabSubnet"
         }
     },
     "variables": {
