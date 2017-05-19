@@ -37,8 +37,7 @@
         }
     },
     "variables": {
-        "vnetId": "[resourceId('PeteTest01RG049341','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+      
     },
     "resources": [
         {
@@ -106,7 +105,7 @@
                            
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[variables('subnetRef')]"
+                                 "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('vnetname')), '/subnets/default')]"
                             }
                         }
                     }
