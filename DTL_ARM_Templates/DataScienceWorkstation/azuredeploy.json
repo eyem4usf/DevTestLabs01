@@ -105,7 +105,7 @@
                            
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                 "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('vnetname')), '/subnets/default')]"
+                                 "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('vnetname')), '/subnets/',parameters('subnetname'))]"
                             }
                         }
                     }
