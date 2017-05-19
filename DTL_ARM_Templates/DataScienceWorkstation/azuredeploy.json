@@ -80,27 +80,9 @@
                 "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
              
             ]
-        },
-        
-        {
-            "type": "Microsoft.Network/networkInterfaces",
-            "name": "[parameters('networkInterfaceName')]",
-            "apiVersion": "2016-09-01",
-            "location": "[parameters('location')]",
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig1",
-                        "properties": {
-                            "subnet": {
-                                "id": "[variables('subnetRef')]"
-                            },
-                            "privateIPAllocationMethod": "Dynamic"
-                        }
-                    }
-                ]
-            }
         }
+        
+    
         
     ],
     "outputs": {
