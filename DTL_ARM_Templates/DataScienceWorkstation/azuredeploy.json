@@ -11,7 +11,7 @@
         },
         "virtualMachineSize": {
             "type": "String",
-            "defaultValue": "Standard D2 v2"
+            "defaultValue": "Standard_D2_v2"
         },
         "adminUsername": {
             "type": "String",
