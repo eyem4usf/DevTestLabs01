@@ -4,7 +4,7 @@
     "parameters": {
         "location": {
             "type": "String",
-            "defaultValue": "westus"
+            "defaultValue": "eastus2"
         },
         "virtualMachineName": {
             "type": "String"
@@ -19,7 +19,7 @@
         },
         "virtualNetworkName": {
             "type": "String",
-            "defaultValue": "Dtlmdc-DevTestLab"
+            "defaultValue": "DtlPete-test01"
         },
         "networkInterfaceName": {
             "type": "String"
@@ -29,11 +29,11 @@
         },
         "subnetName": {
             "type": "String",
-            "defaultValue": "Dtlmdc-DevTestLabSubnet"
+            "defaultValue": "DtlPeteTest01subnet"
         }
     },
     "variables": {
-        "vnetId": "[resourceId('mdc-DevTestLabRG041163','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "vnetId": "[resourceId('PeteTest01RG049341','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
     },
     "resources": [
