@@ -74,12 +74,46 @@
                     },
                     "dataDisks": []
                 },
-                 "labVirtualNetworkId": "[variables('vnetId')]"
+                "networkprofile":{
+                    "networkInterfaces":[
+                        {
+                            "id": "[resourceID('Microsoft.Network/networkInterfaces', parameters('networkinterfacename'))]"
+                        }
+                       ]
+                }
+                 
             },
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
              
             ]
+        },
+          {
+            "comments": "Generalized from resource: '/subscriptions/1c0abacc-76c7-43d5-8ea6-24f43a1e5885/resourceGroups/DTLarmTESTrg/providers/Microsoft.Network/networkInterfaces/dtaarmtestvm543'.",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkinterfacename')]",
+            "apiVersion": "2016-03-30",
+            "location": "[parameters('location')]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                           
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false
+            },
+            "resources": []
+          
         }
         
     
