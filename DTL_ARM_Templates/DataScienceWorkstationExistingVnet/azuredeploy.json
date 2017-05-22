@@ -17,10 +17,6 @@
             "type": "String",
             "defaultValue": "testadmin"
         },
-        "virtualNetworkName": {
-            "type": "String",
-            "defaultValue": "DtlPete-test01"
-        },
         "networkInterfaceName": {
             "type": "String"
         },
@@ -116,35 +112,10 @@
                 "enableIPForwarding": false
             },
             "resources": [],
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetname'))]"
-            ]
-          
-        },
-           {
-            "comments": "Generalized from resource: '/subscriptions/1c0abacc-76c7-43d5-8ea6-24f43a1e5885/resourceGroups/DTLarmTESTrg/providers/Microsoft.Network/virtualNetworks/DTLarmTESTvnet'.",
-            "type": "Microsoft.Network/virtualNetworks",
-            "name": "[parameters('vnetname')]",
-            "apiVersion": "2016-03-30",
-            "location": "eastus2",
-            "properties": {
-                "addressSpace": {
-                    "addressPrefixes": [
-                        "10.1.0.0/16"
-                    ]
-                },
-                "subnets": [
-                    {
-                        "name": "[parameters('subnetName')]",
-                        "properties": {
-                            "addressPrefix": "10.1.0.0/24"
-                        }
-                    }
-                ]
-            },
-            "resources": [],
             "dependsOn": []
+          
         }
+        
         
     
         
