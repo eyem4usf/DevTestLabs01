@@ -29,7 +29,7 @@
         },
         "vnetName": {
             "type": "String",
-            "defaultValue": "DtlPeteTestvnet"
+            "defaultValue": "DtlPeteTest01"
         }
     },
     "variables": {
