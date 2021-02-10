@@ -97,11 +97,7 @@
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]"
                 },
-                "priority": "Spot",
-                "evictionPolicy": "Deallocate",
-                "billingProfile": {
-                    "maxPrice": -1
-                },
+               
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": true
