@@ -875,7 +875,7 @@
                 },
                 "parameters": {}
             }
-        },*/
+        },
         
         
         {
@@ -926,8 +926,8 @@
                     "outputs": {}
                 }
             }
-        }*/
-        ,
+        }
+        ,*/
                
         {
             // Placing management subscription into dedicated management group
