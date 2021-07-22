@@ -828,7 +828,7 @@
                 }
             }
         }
-       /* ,     
+        ,     
         
         {
             // Deploying ESLZ custom policies. Note: all policies will eventually be moved to built-in policies and codebase will be reduced
@@ -853,7 +853,8 @@
                     }
                 }
             }
-        },
+        }
+        /*,
         {
             // Deploying ESLZ Policy Initiative to prevent usage of public endpoints for PaaS services using built-in policies
             "type": "Microsoft.Resources/deployments",
