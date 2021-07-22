@@ -1,0 +1,246 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "enterpriseScaleCompanyPrefix": {
+            "value": "EXOSTARFED"
+        },
+        "managementSubscriptionId": {
+            "value": "06395f0d-5db2-4472-a65f-77d2fbfa0795"
+        },
+        "connectivitySubscriptionId": {
+            "value": "227e29c3-1b47-4d97-b014-fdc12eee0728"
+        },
+        "identitySubscriptionId": {
+            "value": "994c84d8-bb2f-4b79-aeaa-7721f90251a5"
+        },
+        "denySubnetWithoutNsgForIdentity": {
+            "value": "Yes"
+        },
+        "denyRdpForIdentity": {
+            "value": "Yes"
+        },
+        "denyPipForIdentity": {
+            "value": "Yes"
+        },
+        "enableVmBackupForIdentity": {
+            "value": "Yes"
+        },
+        "onlineLzSubscriptionId": {
+            "value": []
+        },
+        "corpLzSubscriptionId": {
+            "value": []
+        },
+        "corpConnectedLzSubscriptionId": {
+            "value": []
+        },
+        "enableLogAnalytics": {
+            "value": "Yes"
+        },
+        "retentionInDays": {
+            "value": "365"
+        },
+        "enableAsc": {
+            "value": "Yes"
+        },
+        "enableAksPolicy": {
+            "value": "Yes"
+        },
+        "emailContactAsc": {
+            "value": "cirt@exostar.com"
+        },
+        "enableAscForServers": {
+            "value": "Free"
+        },
+        "enableAscForAppServices": {
+            "value": "Standard"
+        },
+        "enableAscForStorage": {
+            "value": "Standard"
+        },
+        "enableAscForSql": {
+            "value": "Standard"
+        },
+        "enableAscForSqlOnVm": {
+            "value": "Standard"
+        },
+        "enableAscForKeyVault": {
+            "value": "Standard"
+        },
+        "enableAscForArm": {
+            "value": "Standard"
+        },
+        "enableAscForDns": {
+            "value": "Standard"
+        },
+        "enableAscForKubernetes": {
+            "value": "Standard"
+        },
+        "enableAscForRegistries": {
+            "value": "Standard"
+        },
+        "denyAksPrivileged": {
+            "value": "Yes"
+        },
+        "denyAksPrivilegedEscalation": {
+            "value": "Yes"
+        },
+        "denyHttpIngressForAks": {
+            "value": "Yes"
+        },
+        "enableVmMonitoring": {
+            "value": "Yes"
+        },
+        "enableVmssMonitoring": {
+            "value": "Yes"
+        },
+        "enableSecuritySolution": {
+            "value": "Yes"
+        },
+        "enableEncryptionInTransit": {
+            "value": "Yes"
+        },
+        "enableAgentHealth": {
+            "value": "Yes"
+        },
+        "enableChangeTracking": {
+            "value": "Yes"
+        },
+        "enableUpdateMgmt": {
+            "value": "Yes"
+        },
+        "enableActivityLog": {
+            "value": "Yes"
+        },
+        "enableVmInsights": {
+            "value": "Yes"
+        },
+        "enableServiceMap": {
+            "value": "Yes"
+        },
+        "enableSqlAssessment": {
+            "value": "Yes"
+        },
+        "enableSqlAudit": {
+            "value": "Yes"
+        },
+        "enableSqlEncryption": {
+            "value": "Yes"
+        },
+        "enableVmBackup": {
+            "value": "Yes"
+        },
+        "denyRdp": {
+            "value": "Yes"
+        },
+        "denyPublicEndpoints": {
+            "value": "Yes"
+        },
+        "enableStorageHttps": {
+            "value": "Yes"
+        },
+        "enableLzDdoS": {
+            "value": "Yes"
+        },
+        "denyIpForwarding": {
+            "value": "Yes"
+        },
+        "denySubnetWithoutNsg": {
+            "value": "Yes"
+        },
+        "addressPrefix": {
+            "value": "10.105.0.0/16"
+        },
+        "enableVpnGw": {
+            "value": "Yes"
+        },
+        "enableErGw": {
+            "value": "No"
+        },
+        "location": {
+            "value": "usgovvirginia"
+        },
+        "enableHub": {
+            "value": "vhub"
+        },
+        "enableAzFw": {
+            "value": "Yes"
+        },
+        "enableAzFwDnsProxy": {
+            "value": "No"
+        },
+        "enableDdoS": {
+            "value": "Yes"
+        },
+        "enablePrivateDnsZones": {
+            "value": "Yes"
+        },
+        "enablePrivateDnsZonesForLzs": {
+            "value": "Yes"
+        },
+        "subnetMaskForAzFw": {
+            "value": "10.105.0.0/24"
+        },
+        "subnetMaskForGw": {
+            "value": "10.105.7.0/24"
+        },
+        "gwRegionalOrAz": {
+            "value": ""
+        },
+        "gwAzSku": {
+            "value": ""
+        },
+        "gwRegionalSku": {
+            "value": "VpnGw2"
+        },
+        "erRegionalOrAz": {
+            "value": ""
+        },
+        "erAzSku": {
+            "value": ""
+        },
+        "erRegionalSku": {
+            "value": ""
+        },
+        "firewallZones": {
+            "value": []
+        },
+        "paToken": {
+            "value": null
+        },
+        "principalId": {
+            "value": []
+        },
+        "appId": {
+            "value": ""
+        },
+        "principalSecret": {
+            "value": null
+        },
+        "gitHubUserNameOrOrg": {
+            "value": ""
+        },
+        "repositoryName": {
+            "value": ""
+        },
+        "enableAzOps": {
+            "value": "No"
+        },
+        "subscriptionId": {
+            "value": "06395f0d-5db2-4472-a65f-77d2fbfa0795"
+        },
+        "singlePlatformSubscriptionId": {
+            "value": ""
+        },
+        "expressRouteScaleUnit": {
+            "value": "1"
+        },
+        "vpnGateWayScaleUnit": {
+            "value": "1"
+        },
+        "identityAddressPrefix": {
+            "value": "10.105.0.0/24"
+        }
+    }
+}
