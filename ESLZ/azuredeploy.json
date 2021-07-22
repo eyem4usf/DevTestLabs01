@@ -899,7 +899,7 @@
             }
         },
         */
-        /*
+       
         {
             // One of Azure's untold stories.....
             "type": "Microsoft.Resources/deployments",
@@ -929,7 +929,7 @@
                 }
             }
         }
-        ,*/
+        ,
                
         {
             // Placing management subscription into dedicated management group
