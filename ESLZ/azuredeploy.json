@@ -613,7 +613,7 @@
             "aksPrivEscalationPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-AksPrivEscalationPolicyAssignment.json"
             "aksPrivilegedPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-AksPrivilegedPolicyAssignment.json"
             "tlsSslPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-DINE-APPEND-TLS-SSL-PolicyAssignment.json"
-            "akshttpsPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-AksWithout"httpsPolicyAssignment.json"            
+            "aksHttpsPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-AksWithoutHttpsPolicyAssignment.json"            
             "ipFwdPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-IPForwardingPolicyAssignment.json"
             "publicEndpointPolicySetDefinition": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyDefinitions/DENY-PublicEndpointsPolicySetDefinition.json"
             "publicEndpointPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-PublicEndpointPolicyAssignment.json"
@@ -621,7 +621,7 @@
             "privateDnsZonePolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DINE-PrivateDNSZonesPolicyAssignment.json"
             "pipPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-PublicIpAddressPolicyAssignment.json"
             "rdpFromInternetPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-RDPFromInternetPolicyAssignment.json"
-            "storagehttpsPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-StorageWithout"httpsPolicyAssignment.json"
+            "storageHttpsPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-StorageWithoutHttpsPolicyAssignment.json"
             "subnetNsgPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DENY-SubnetWithoutNsgPolicyAssignment.json"
             "sqlAuditPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DINE-SQLAuditingPolicyAssignment.json"
             "sqlEncryptionPolicyAssignment": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/policyAssignments/DINE-SQLAuditingPolicyAssignment.json"
@@ -629,7 +629,7 @@
             "corpVnetPeering": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/subscriptionTemplates/vnetPeering.json"
             "corpVwanPeering": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/subscriptionTemplates/vnetPeeringVwan.json"
             "privateDnsZones": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/resourceGroupTemplates/privateDnsZones.json"
-            "roleAssignments": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/roleAssignments/roleAssignment.json"')]"
+            "roleAssignments": "https://raw.githubusercontent.com/Azure/Enterprise-Scale/main/eslzArm/managementGroupTemplates/roleAssignments/roleAssignment.json"'
         },
         // Declaring deterministic deployment names
         "deploymentSuffix": "[concat('-', deployment().location, guid(parameters('enterpriseScaleCompanyPrefix')))]",
