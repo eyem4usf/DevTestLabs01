@@ -854,7 +854,7 @@
                 }
             }
         },
-        */
+        
         
         {
             // Deploying ESLZ Policy Initiative to prevent usage of public endpoints for PaaS services using built-in policies
@@ -875,8 +875,8 @@
                 },
                 "parameters": {}
             }
-        }
-        /*,
+        },*/
+        
         
         {
             // Deploying ESLZ Policy Initiative to deploy Private DNS Zones for PaaS services using built-in policies
@@ -926,7 +926,8 @@
                     "outputs": {}
                 }
             }
-        },
+        }*/
+        ,
                
         {
             // Placing management subscription into dedicated management group
@@ -1104,7 +1105,8 @@
                     }
                 }
             }
-        },
+        }
+        /*,
         {
             // Assigning Log Analytics workspace policy to management management group if condition is true
             "condition": "[and(equals(parameters('enableLogAnalytics'), 'Yes'), not(empty(parameters('managementSubscriptionId'))))]",
