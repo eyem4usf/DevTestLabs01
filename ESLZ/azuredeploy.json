@@ -829,7 +829,7 @@
             }
         }
         ,     
-        
+       /* 
         {
             // Deploying ESLZ custom policies. Note: all policies will eventually be moved to built-in policies and codebase will be reduced
             "type": "Microsoft.Resources/deployments",
@@ -853,8 +853,9 @@
                     }
                 }
             }
-        }
-        /*,
+        },
+        */
+        
         {
             // Deploying ESLZ Policy Initiative to prevent usage of public endpoints for PaaS services using built-in policies
             "type": "Microsoft.Resources/deployments",
@@ -874,7 +875,9 @@
                 },
                 "parameters": {}
             }
-        },
+        }
+        /*,
+        
         {
             // Deploying ESLZ Policy Initiative to deploy Private DNS Zones for PaaS services using built-in policies
             "type": "Microsoft.Resources/deployments",
